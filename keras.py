@@ -1,6 +1,7 @@
 import tensorflow
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dense,Dropout,Flatten
+from keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.layers import BatchNormalization
@@ -17,11 +18,17 @@ x_train = x_train / 255.0
 x_test = x_test/ 255.0
 y_train_cat=to_categorical(y_train)
 y_test_cat=to_categorical(y_test)
-model=Sequential()
-model.add(Dense(units=256,input_dim=28*28,activation='relu'))
-model.add(Dense(units=128, activation='relu'))
-model.add(BatchNormalization())
-model.add(Dense(units=10, activation='softmax'))
+model = Sequential()
+model.add(Conv2D(32, kernel_size=(3, 3),
+                 activation='relu',
+                 input_shape=input_shape))
+model.add(Conv2D(64, (3, 3), activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+model.add(Flatten())
+model.add(Dense(128, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(num_classes, activation='softmax'))
 model.summary()
 model.compile(optimizer=Adam(), loss='categorical_crossentropy',metrics=['accuracy'])
 h = model.fit(x_train, y_train_cat, epochs=1)
