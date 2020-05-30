@@ -29,7 +29,7 @@ model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(10, activation='softmax'))
 model.summary()
-model.compile(optimizer=Adam(), loss='categorical_crossentropy',metrics=['accuracy'])
+model.compile(optimizer=Adam(), loss='sparse_categorical_crossentropy',metrics=['accuracy'])
 h = model.fit(x_train, y_train, epochs=1)
 accuracy=model.evaluate(x_train,y_train)
 accuracy=accuracy[1]*100
