@@ -16,6 +16,7 @@ x_train = x_train_1d.astype('float32')
 x_test = x_test_1d.astype('float32')
 x_train = x_train / 255.0
 x_test = x_test/ 255.0
+input_shape = (28, 28, 1)
 y_train_cat=to_categorical(y_train)
 y_test_cat=to_categorical(y_test)
 model = Sequential()
