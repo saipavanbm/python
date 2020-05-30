@@ -30,7 +30,7 @@ accuracy=accuracy[1]*100
 print(accuracy)
 import os
 os.system("touch accuracy.txt")
-os.system("echo {} > accuracy.txt".format(accuracy))
+os.system("echo {} > /root/pyt/accuracy.txt".format(accuracy))
 model.save('mnist.h5')
 
 
