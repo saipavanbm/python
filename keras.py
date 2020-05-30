@@ -27,10 +27,11 @@ model.compile(optimizer=Adam(), loss='categorical_crossentropy',metrics=['accura
 h = model.fit(x_train, y_train_cat, epochs=10)
 accuracy=model.evaluate(x_train,y_train_cat)
 accuracy=accuracy[1]*100
-print(accuracy)
 import os
-os.system("touch accuracy.txt")
-os.system("echo {} > accuracy.txt".format(accuracy))
+file = open("accuracy.txt","w+")
+file.write(str(accuracy))
+file.close()
+os.system("mv /accuracy.txt /pyt/")
 model.save('mnist.h5')
 
 
