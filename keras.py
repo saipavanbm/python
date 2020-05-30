@@ -10,15 +10,13 @@ train,test=dataset
 x_train,y_train=train
 x_test,y_test=test
 x_test.shape
-x_train_1d = x_train.reshape(-1 , 28*28)
-x_test_1d = x_test.reshape(-1 , 28*28)
-x_train = x_train_1d.astype('float32')
-x_test = x_test_1d.astype('float32')
+x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+x_train = x_train.astype('float32')
+x_test = x_test.astype('float32')
 x_train = x_train / 255.0
 x_test = x_test/ 255.0
 input_shape = (28, 28, 1)
-y_train_cat=to_categorical(y_train)
-y_test_cat=to_categorical(y_test)
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3),
                  activation='relu',
@@ -32,8 +30,8 @@ model.add(Dropout(0.5))
 model.add(Dense(10, activation='softmax'))
 model.summary()
 model.compile(optimizer=Adam(), loss='categorical_crossentropy',metrics=['accuracy'])
-h = model.fit(x_train, y_train_cat, epochs=1)
-accuracy=model.evaluate(x_train,y_train_cat)
+h = model.fit(x_train, y_train, epochs=1)
+accuracy=model.evaluate(x_train,y_train)
 accuracy=accuracy[1]*100
 import os
 file = open("accuracy.txt","w+")
