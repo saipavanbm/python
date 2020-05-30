@@ -24,14 +24,14 @@ model.add(BatchNormalization())
 model.add(Dense(units=10, activation='softmax'))
 model.summary()
 model.compile(optimizer=Adam(), loss='categorical_crossentropy',metrics=['accuracy'])
-h = model.fit(x_train, y_train_cat, epochs=10)
+h = model.fit(x_train, y_train_cat, epochs=1)
 accuracy=model.evaluate(x_train,y_train_cat)
 accuracy=accuracy[1]*100
 import os
 file = open("accuracy.txt","w+")
 file.write(str(accuracy))
 file.close()
-os.system("mv /accuracy.txt /pyt/")
+os.system("mv /accuracy.txt /pyth/")
 model.save('mnist.h5')
 
 
