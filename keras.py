@@ -22,7 +22,7 @@ model.summary()
 model.compile(optimizer=Adam(), loss='categorical_crossentropy',metrics=['accuracy'])
 h = model.fit(x_train, y_train_cat, epochs=10)
 accuracy=model.evaluate(x_train,y_train_cat)
-accuracy=accuracy[1]*1000
+accuracy=accuracy[1]*100
 print(accuracy)
 import os
 os.system("touch accuracy.txt")
